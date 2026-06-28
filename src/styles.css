@@ -1,0 +1,214 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+@import "@fontsource/michroma/400.css";
+@import "@fontsource/sora/400.css";
+@import "@fontsource/sora/600.css";
+@import "@fontsource/sora/700.css";
+@import "@fontsource/jetbrains-mono/500.css";
+@import "@fontsource/jetbrains-mono/700.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-neon: var(--accent-neon);
+  --color-magenta: var(--accent-magenta);
+  --color-glow: var(--accent-glow);
+  --color-bg-1: var(--bg-1);
+  --color-glass-bg: var(--nav-glass);
+  --color-glass-border: var(--glass-border);
+
+  --font-display: "Michroma", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+:root {
+  --radius: 0.625rem;
+
+  /* TIMKOLAS dark/RGB palette (piyaau-reskin) */
+  --bg-0: #060608;
+  --bg-1: #0c0c16;
+  --background: #060608;
+  --foreground: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.6);
+
+  /* COLOR DISCIPLINE — cyan king, magenta rare punctuation, purple ambient only. */
+  --accent-neon: #00e5ff; /* cyan — KING */
+  --accent-magenta: #ff3ea5; /* magenta — rare ≤1 per section */
+  --accent-glow: #7c3aed; /* purple — retired from foreground */
+  --gradient-hero: linear-gradient(110deg, #00e5ff 0%, #00e5ff 55%, #ff3ea5 100%);
+  --gutter: clamp(24px, 5vw, 80px);
+  --maxw: 80rem; /* canonical content width (1280px) */
+  --section-y: clamp(64px, 9vh, 112px); /* shared vertical rhythm */
+
+  --nav-glass: rgba(12, 12, 22, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --faq-item-bg: rgba(255, 255, 255, 0.05);
+  --marquee-bg: #000000;
+  --footer-bg: #08080c;
+
+  /* piyaau spacing/system — unchanged */
+  --radius-btn: 50px;
+  --padding-btn: 12px 24px;
+  --padding-section: 64px 32px;
+  --padding-hero: 128px 32px 0;
+  --radius-faq: 12px;
+  --padding-card: 16px;
+
+  /* shadcn tokens */
+  --card: #0c0c16;
+  --card-foreground: #ffffff;
+  --popover: #0c0c16;
+  --popover-foreground: #ffffff;
+  --primary: #00e5ff;
+  --primary-foreground: #060608;
+  --secondary: #15152a;
+  --secondary-foreground: #ffffff;
+  --muted: #15152a;
+  --muted-foreground: rgba(255, 255, 255, 0.6);
+  --accent: #7c3aed;
+  --accent-foreground: #ffffff;
+  --destructive: #ff3ea5;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.12);
+  --ring: #00e5ff;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html,
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+}
+
+@utility text-glow-neon {
+  text-shadow:
+    0 0 18px color-mix(in oklab, var(--accent-neon) 70%, transparent),
+    0 0 60px color-mix(in oklab, var(--accent-neon) 35%, transparent);
+}
+
+@utility text-gradient-hero {
+  background: var(--gradient-hero);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+@utility pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: var(--padding-btn);
+  border-radius: var(--radius-btn);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+  cursor: pointer;
+}
+
+@utility pill-primary {
+  background: var(--accent-neon);
+  color: #060608;
+  box-shadow:
+    0 0 0 1px rgba(0, 229, 255, 0.4),
+    0 0 30px rgba(0, 229, 255, 0.35);
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      0 0 0 1px rgba(0, 229, 255, 0.6),
+      0 0 40px rgba(0, 229, 255, 0.55);
+  }
+}
+
+@utility pill-ghost {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid var(--glass-border);
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
+
+@utility section-x {
+  padding-inline: var(--gutter);
+}
+
+/* Canonical content column — every section's inner wrapper uses this so the
+   left/right edges line up perfectly down the whole page (alignment discipline). */
+@utility shell {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+}
+
+/* Consistent eyebrow label ("/ Atmosphere" etc.) — one source of truth. */
+@utility eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--accent-neon);
+}
+
+@utility marquee-mask {
+  mask-image: linear-gradient(90deg, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 5%, black 95%, transparent);
+}
+
+/* Respect reduced-motion globally for our GSAP-driven transforms' CSS fallbacks. */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+  }
+}
