@@ -7,6 +7,7 @@ import {
   useState,
 } from "react";
 import controllerImg from "../assets/controller.png";
+import AnalogStick from "./AnalogStick";
 import type { MonitorGameHandle } from "./MonitorGame";
 import MonitorGame from "./MonitorGame";
 
@@ -60,40 +61,33 @@ const ControllerScene = forwardRef<ControllerSceneHandle, { className?: string }
     const [phase, setPhase] = useState<"descend" | "pause" | "ignite" | "unfold" | "active">("descend");
     const phaseRef = useRef<"descend" | "pause" | "ignite" | "unfold" | "active">("descend");
 
-    // Button press state (for visual feedback and game steering)
-    const [leftPressed, setLeftPressed] = useState(false);
-    const [rightPressed, setRightPressed] = useState(false);
+    // Stick direction refs — used by the RAF loop for controller tilt
     const leftPressedRef = useRef(false);
     const rightPressedRef = useRef(false);
     const steerTiltRef = useRef(0);
 
-    const startLeft = useCallback(() => {
+    // AnalogStick steer callbacks (passed as stable refs — no re-renders)
+    const handleLeftSteer = useCallback((dx: number) => {
       if (phaseRef.current !== "active") return;
-      leftPressedRef.current = true;
+      leftPressedRef.current = dx < -0.3;
       rightPressedRef.current = false;
-      setLeftPressed(true);
-      setRightPressed(false);
-      gameRef.current?.steerLeft(true);
+      if (dx < -0.3) gameRef.current?.steerLeft(true);
     }, []);
 
-    const startRight = useCallback(() => {
-      if (phaseRef.current !== "active") return;
-      rightPressedRef.current = true;
+    const handleLeftRelease = useCallback(() => {
       leftPressedRef.current = false;
-      setRightPressed(true);
-      setLeftPressed(false);
-      gameRef.current?.steerRight(true);
-    }, []);
-
-    const releaseLeft = useCallback(() => {
-      leftPressedRef.current = false;
-      setLeftPressed(false);
       gameRef.current?.steerLeft(false);
     }, []);
 
-    const releaseRight = useCallback(() => {
+    const handleRightSteer = useCallback((dx: number) => {
+      if (phaseRef.current !== "active") return;
+      rightPressedRef.current = dx > 0.3;
+      leftPressedRef.current = false;
+      if (dx > 0.3) gameRef.current?.steerRight(true);
+    }, []);
+
+    const handleRightRelease = useCallback(() => {
       rightPressedRef.current = false;
-      setRightPressed(false);
       gameRef.current?.steerRight(false);
     }, []);
 
@@ -489,32 +483,28 @@ const ControllerScene = forwardRef<ControllerSceneHandle, { className?: string }
               }}
             />
 
-            {/* LEFT JOYSTICK */}
-            <div
-              role="button" aria-label="Steer left"
-              onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); startLeft(); }}
-              onPointerUp={releaseLeft} onPointerCancel={releaseLeft} onPointerLeave={releaseLeft}
-              style={{
-                position: "absolute", left: "26%", top: "25%", width: "18%", height: "24%", borderRadius: "50%",
-                cursor: isInteractive ? "pointer" : "default", zIndex: 10, touchAction: "none",
-                boxShadow: leftPressed ? "0 0 0 2px rgba(255,100,0,0.8), 0 0 30px rgba(255,100,0,0.6)" : isInteractive ? "0 0 0 1px rgba(255,100,0,0.4)" : "none",
-                background: leftPressed ? "radial-gradient(circle, rgba(255,100,0,0.3) 0%, transparent 70%)" : "transparent",
-                transition: "all 0.1s ease",
-              }}
+            {/* LEFT ANALOG STICK — cx=25.7, cy=31.4, sizePct=9.3, travelPct=0.9 */}
+            <AnalogStick
+              cx={25.7}
+              cy={31.4}
+              sizePct={9.3}
+              travelPct={0.9}
+              ringColor="#ff7a1a"
+              interactive={isInteractive}
+              onSteer={(dx) => handleLeftSteer(dx)}
+              onRelease={handleLeftRelease}
             />
 
-            {/* RIGHT JOYSTICK */}
-            <div
-              role="button" aria-label="Steer right"
-              onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); startRight(); }}
-              onPointerUp={releaseRight} onPointerCancel={releaseRight} onPointerLeave={releaseRight}
-              style={{
-                position: "absolute", right: "32%", top: "40%", width: "18%", height: "24%", borderRadius: "50%",
-                cursor: isInteractive ? "pointer" : "default", zIndex: 10, touchAction: "none",
-                boxShadow: rightPressed ? "0 0 0 2px rgba(0,229,255,0.8), 0 0 30px rgba(0,229,255,0.6)" : isInteractive ? "0 0 0 1px rgba(0,229,255,0.4)" : "none",
-                background: rightPressed ? "radial-gradient(circle, rgba(0,229,255,0.3) 0%, transparent 70%)" : "transparent",
-                transition: "all 0.1s ease",
-              }}
+            {/* RIGHT ANALOG STICK — cx=61, cy=44, sizePct=9.3, travelPct=0.9 */}
+            <AnalogStick
+              cx={61}
+              cy={44}
+              sizePct={9.3}
+              travelPct={0.9}
+              ringColor="#00e5ff"
+              interactive={isInteractive}
+              onSteer={(dx) => handleRightSteer(dx)}
+              onRelease={handleRightRelease}
             />
 
             {/* Subtle floating particles emitted from controller (active phase) */}
