@@ -509,7 +509,7 @@ const ControllerScene = forwardRef<ControllerSceneHandle, { className?: string }
               onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); startRight(); }}
               onPointerUp={releaseRight} onPointerCancel={releaseRight} onPointerLeave={releaseRight}
               style={{
-                position: "absolute", right: "14%", top: "50%", width: "22%", height: "28%", borderRadius: "50%",
+                position: "absolute", right: "28%", top: "55%", width: "22%", height: "28%", borderRadius: "50%",
                 cursor: isInteractive ? "pointer" : "default", zIndex: 10, touchAction: "none",
                 boxShadow: rightPressed ? "0 0 0 2px rgba(255,62,165,0.8), 0 0 30px rgba(255,62,165,0.6)" : isInteractive ? "0 0 0 1px rgba(255,62,165,0.3)" : "none",
                 background: rightPressed ? "radial-gradient(circle, rgba(255,62,165,0.3) 0%, transparent 70%)" : "transparent",
