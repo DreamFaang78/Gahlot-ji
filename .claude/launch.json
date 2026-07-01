@@ -3,9 +3,10 @@
   "configurations": [
     {
       "name": "timkolas-dev",
-      "runtimeExecutable": "bun",
+      "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
-      "port": 8080
+      "port": 8081,
+      "autoPort": false
     }
   ]
 }

@@ -212,3 +212,11 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Holographic data packet particles moving up the energy stream */
+@keyframes cs-data-packet {
+  0% { top: 100%; transform: translate(-50%, 0) scale(0); opacity: 0; }
+  10% { transform: translate(-50%, 0) scale(1); opacity: 1; }
+  90% { transform: translate(-50%, 0) scale(1); opacity: 1; }
+  100% { top: 0%; transform: translate(-50%, 0) scale(0); opacity: 0; }
+}
