@@ -497,8 +497,8 @@ const ControllerScene = forwardRef<ControllerSceneHandle, { className?: string }
               style={{
                 position: "absolute", left: "14%", top: "38%", width: "22%", height: "28%", borderRadius: "50%",
                 cursor: isInteractive ? "pointer" : "default", zIndex: 10, touchAction: "none",
-                boxShadow: leftPressed ? "0 0 0 2px rgba(0,229,255,0.8), 0 0 30px rgba(0,229,255,0.6)" : isInteractive ? "0 0 0 1px rgba(0,229,255,0.3)" : "none",
-                background: leftPressed ? "radial-gradient(circle, rgba(0,229,255,0.3) 0%, transparent 70%)" : "transparent",
+                boxShadow: leftPressed ? "0 0 0 2px rgba(255,100,0,0.8), 0 0 30px rgba(255,100,0,0.6)" : isInteractive ? "0 0 0 1px rgba(255,100,0,0.3)" : "none",
+                background: leftPressed ? "radial-gradient(circle, rgba(255,100,0,0.3) 0%, transparent 70%)" : "transparent",
                 transition: "all 0.1s ease",
               }}
             />
@@ -511,8 +511,8 @@ const ControllerScene = forwardRef<ControllerSceneHandle, { className?: string }
               style={{
                 position: "absolute", right: "28%", top: "55%", width: "22%", height: "28%", borderRadius: "50%",
                 cursor: isInteractive ? "pointer" : "default", zIndex: 10, touchAction: "none",
-                boxShadow: rightPressed ? "0 0 0 2px rgba(255,62,165,0.8), 0 0 30px rgba(255,62,165,0.6)" : isInteractive ? "0 0 0 1px rgba(255,62,165,0.3)" : "none",
-                background: rightPressed ? "radial-gradient(circle, rgba(255,62,165,0.3) 0%, transparent 70%)" : "transparent",
+                boxShadow: rightPressed ? "0 0 0 2px rgba(0,229,255,0.8), 0 0 30px rgba(0,229,255,0.6)" : isInteractive ? "0 0 0 1px rgba(0,229,255,0.3)" : "none",
+                background: rightPressed ? "radial-gradient(circle, rgba(0,229,255,0.3) 0%, transparent 70%)" : "transparent",
                 transition: "all 0.1s ease",
               }}
             />
