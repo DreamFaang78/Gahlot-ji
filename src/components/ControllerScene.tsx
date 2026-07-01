@@ -495,16 +495,13 @@ const ControllerScene = forwardRef<ControllerSceneHandle, { className?: string }
               onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); startLeft(); }}
               onPointerUp={releaseLeft} onPointerCancel={releaseLeft} onPointerLeave={releaseLeft}
               style={{
-                position: "absolute", left: "14%", top: "38%", width: "22%", height: "28%", borderRadius: "50%",
+                position: "absolute", left: "26%", top: "25%", width: "18%", height: "24%", borderRadius: "50%",
                 cursor: isInteractive ? "pointer" : "default", zIndex: 10, touchAction: "none",
-                boxShadow: leftPressed ? "0 0 0 2px rgba(255,100,0,0.8), 0 0 30px rgba(255,100,0,0.6)" : isInteractive ? "0 0 0 1px rgba(255,100,0,0.3)" : "none",
+                boxShadow: leftPressed ? "0 0 0 2px rgba(255,100,0,0.8), 0 0 30px rgba(255,100,0,0.6)" : isInteractive ? "0 0 0 1px rgba(255,100,0,0.4)" : "none",
                 background: leftPressed ? "radial-gradient(circle, rgba(255,100,0,0.3) 0%, transparent 70%)" : "transparent",
                 transition: "all 0.1s ease",
-                display: "flex", alignItems: "center", justifyContent: "center"
               }}
-            >
-              <img src="/controller/knob.webp" alt="Left stick" style={{ width: "70%", height: "70%", objectFit: "contain", pointerEvents: "none", transform: leftPressed ? "scale(0.95) translateY(2px)" : "none", transition: "transform 0.1s ease" }} />
-            </div>
+            />
 
             {/* RIGHT JOYSTICK */}
             <div
@@ -512,16 +509,13 @@ const ControllerScene = forwardRef<ControllerSceneHandle, { className?: string }
               onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); startRight(); }}
               onPointerUp={releaseRight} onPointerCancel={releaseRight} onPointerLeave={releaseRight}
               style={{
-                position: "absolute", right: "28%", top: "55%", width: "22%", height: "28%", borderRadius: "50%",
+                position: "absolute", right: "32%", top: "40%", width: "18%", height: "24%", borderRadius: "50%",
                 cursor: isInteractive ? "pointer" : "default", zIndex: 10, touchAction: "none",
-                boxShadow: rightPressed ? "0 0 0 2px rgba(0,229,255,0.8), 0 0 30px rgba(0,229,255,0.6)" : isInteractive ? "0 0 0 1px rgba(0,229,255,0.3)" : "none",
+                boxShadow: rightPressed ? "0 0 0 2px rgba(0,229,255,0.8), 0 0 30px rgba(0,229,255,0.6)" : isInteractive ? "0 0 0 1px rgba(0,229,255,0.4)" : "none",
                 background: rightPressed ? "radial-gradient(circle, rgba(0,229,255,0.3) 0%, transparent 70%)" : "transparent",
                 transition: "all 0.1s ease",
-                display: "flex", alignItems: "center", justifyContent: "center"
               }}
-            >
-              <img src="/controller/knob.webp" alt="Right stick" style={{ width: "70%", height: "70%", objectFit: "contain", pointerEvents: "none", transform: rightPressed ? "scale(0.95) translateY(2px)" : "none", transition: "transform 0.1s ease" }} />
-            </div>
+            />
 
             {/* Subtle floating particles emitted from controller (active phase) */}
             {isInteractive && (
