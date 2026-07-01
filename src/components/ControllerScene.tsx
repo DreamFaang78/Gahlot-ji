@@ -500,8 +500,11 @@ const ControllerScene = forwardRef<ControllerSceneHandle, { className?: string }
                 boxShadow: leftPressed ? "0 0 0 2px rgba(255,100,0,0.8), 0 0 30px rgba(255,100,0,0.6)" : isInteractive ? "0 0 0 1px rgba(255,100,0,0.3)" : "none",
                 background: leftPressed ? "radial-gradient(circle, rgba(255,100,0,0.3) 0%, transparent 70%)" : "transparent",
                 transition: "all 0.1s ease",
+                display: "flex", alignItems: "center", justifyContent: "center"
               }}
-            />
+            >
+              <img src="/controller/knob.webp" alt="Left stick" style={{ width: "70%", height: "70%", objectFit: "contain", pointerEvents: "none", transform: leftPressed ? "scale(0.95) translateY(2px)" : "none", transition: "transform 0.1s ease" }} />
+            </div>
 
             {/* RIGHT JOYSTICK */}
             <div
@@ -514,8 +517,11 @@ const ControllerScene = forwardRef<ControllerSceneHandle, { className?: string }
                 boxShadow: rightPressed ? "0 0 0 2px rgba(0,229,255,0.8), 0 0 30px rgba(0,229,255,0.6)" : isInteractive ? "0 0 0 1px rgba(0,229,255,0.3)" : "none",
                 background: rightPressed ? "radial-gradient(circle, rgba(0,229,255,0.3) 0%, transparent 70%)" : "transparent",
                 transition: "all 0.1s ease",
+                display: "flex", alignItems: "center", justifyContent: "center"
               }}
-            />
+            >
+              <img src="/controller/knob.webp" alt="Right stick" style={{ width: "70%", height: "70%", objectFit: "contain", pointerEvents: "none", transform: rightPressed ? "scale(0.95) translateY(2px)" : "none", transition: "transform 0.1s ease" }} />
+            </div>
 
             {/* Subtle floating particles emitted from controller (active phase) */}
             {isInteractive && (
